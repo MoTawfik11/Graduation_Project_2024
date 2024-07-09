@@ -1,0 +1,506 @@
+<?xml version="1.0"?>
+
+<robot name="wheelchair" xmlns:xacro="http://www.ros,org/wiki/xcro">
+<xacro:include filename="$(find wheelchair_gp_description)/urdf/wheelchair.gazebo"/>
+
+
+
+    <!--dummy joint to make sure all body related(Motarabt bb3do) or (Base Frame )-->
+    <link name="robot_footprint">    
+    </link>
+
+
+    <joint name="robot_footprint_joint" type="fixed">
+        <parent link="robot_footprint"/>
+        <child link="base_link"/>
+    </joint>
+    
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+      <mass value="100" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/base_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.647058823529412 0.619607843137255 0.588235294117647 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/base_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+   <link name="right_wheel_link">
+    <inertial>
+      <origin xyz="0.0051016277034862 -0.030000000000002 -0.00883712628242247" rpy="0 0 0" />
+      <mass value="5.0" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/right_wheel_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/right_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+
+  <joint name="right_wheel_joint" type="continuous">
+    <origin xyz="-0.0782370331711224 -0.291972990052419 -0.17051" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="right_wheel_link" />
+    <axis xyz="0 1 0" />
+    <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/> -->
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+  </joint> 
+
+
+<!-- ******    LEFT WHEEL     ********* -->
+
+
+  <link name="left_wheel_link">
+    <inertial>
+      <origin xyz="0.00019641498461731 0.0300000000000018 -0.00883712628242247" rpy="0 0 0" />
+      <mass value="5.0" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/left_wheel_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/left_wheel_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint name="left_wheel_joint" type="continuous">
+    <origin xyz="-0.0732 0.27496 -0.17051" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="left_wheel_link" />
+    <axis xyz="0 1 0" />
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+  </joint> 
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+  <link name="c_rr_link">
+    <inertial>
+      <origin xyz="-0.0451841547006857 -0.0495150883715779 0.0403769854454999" rpy="0 0 0" />
+      <mass value="0.121211258399187" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_rr_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_rr_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint name="c_rr_joint" type="fixed">
+    <origin xyz="-0.34822 -0.32107 -0.22363" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="c_rr_link" />
+    <axis xyz="0 0 1" />
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+  </joint>
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+    <link name="wheel_rr_link">
+        <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            <mass value="0.1"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <visual name="front_caster_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+                <texture filename=""/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="wheel_rr_joint" type="fixed"> 
+    <origin xyz="-0.0050649 -0.026911 -0.0989496" rpy="0 0 0" />
+        <parent link="c_rr_link"/>
+        <child link="wheel_rr_link"/>
+        <axis xyz="0.0 0.0 0.0"/>
+            <!-- <dynamics damping="1" friction="0.2" /> -->
+
+        <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/> -->
+    </joint>
+
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+  <link name="c_rl_link">
+    <inertial>
+      <origin xyz="-0.0310419563112246 0.0352158260013177 0.0403769854454989" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_rl_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_rl_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint name="c_rl_joint" type="fixed">
+    <origin xyz="-0.3413 0.30405 -0.22363" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="c_rl_link" />
+    <axis xyz="0 0 1" />
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+  </joint>
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+
+    <link name="wheel_rl_link">
+        <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            <mass value="0.1"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <visual name="front_caster_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+                <texture filename=""/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="wheel_rl_joint" type="fixed">
+    <origin xyz="-0.0090963 0.026911 -0.0989496" rpy="0 0 0" />
+        <parent link="c_rl_link"/>
+        <child link="wheel_rl_link"/>
+        <axis xyz="0.0 0.0 0.0"/>
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+       <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/> -->
+    </joint>
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+
+  <link name="c_fl_link">
+    <inertial>
+      <origin xyz="3.13828648068615E-08 0.00433096505375724 -0.0403769854455023" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_fl_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_fl_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+
+  <joint name="c_fl_joint" type="fixed">
+    <origin xyz="0.27689 0.30405 -0.22363" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="c_fl_link" />
+    <axis xyz="0 0 1" />
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+  </joint>
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+    <link name="wheel_fl_link">
+        <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            <mass value="0.1"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <visual name="front_caster_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+                <texture filename=""/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="wheel_fl_joint" type="fixed">
+    <origin xyz="-0.0044614 0.026911 -0.0989496" rpy="0 0 0" />
+        <parent link="c_fl_link"/>
+        <child link="wheel_fl_link"/>
+        <axis xyz="0.0 0.0 0.0"/>
+            <!-- <dynamics damping="1" friction="0.2" /> -->
+
+        <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/> -->
+    </joint>
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+
+
+  <link name="c_fr_link">
+    <inertial>
+      <origin xyz="-3.13828649178838E-08 -0.00433096505375735 0.0403769854454989" rpy="0 0 0" />
+      <mass value="0.1" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_fr_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 1" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/c_fr_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint name="c_fr_joint" type="fixed">
+    <origin xyz="0.28382 -0.32107 -0.22363" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="c_fr_link" />
+    <axis xyz="0 0 1" />
+    <!-- <dynamics damping="0.5" friction="5" /> -->
+  </joint>
+
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+    <link name="wheel_fr_link">
+        <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+            <mass value="0.1"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+        <visual name="front_caster_visual">
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+            <material name="">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+                <texture filename=""/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.0499"/>
+            </geometry>
+        </collision>
+    </link>
+
+
+    <joint name="wheel_fr_joint" type="fixed">
+    <origin xyz="0 -0.01 -0.0989496" rpy="0 0 0" />
+        <parent link="c_fr_link"/>
+        <child link="wheel_fr_link"/>
+        <axis xyz="0.0 0.0 0.0"/>
+            <!-- <dynamics damping="1" friction="0.2" /> -->
+
+        <!-- <limit lower="0.0" upper="0.0" effort="0.0" velocity="0.0"/> -->
+    </joint>
+
+
+
+<!-- ******    RIGHT WHEEL     ********* -->
+
+
+
+
+
+  <link name="chair_link">
+    <inertial>
+      <origin xyz="-0.186634259898291 0.000154601290753766 0.685315360247557" rpy="0 0 0" />
+      <mass value="114.06700966343" />
+      <inertia ixx="0.0" ixy="0.0" ixz="0.0" iyy="0.0" iyz="0.0" izz="0.0" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/chair_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/chair_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+
+
+
+  <joint name="chair_joint" type="fixed">
+    <origin xyz="0.085065 -0.021973 -0.21301" rpy="0 0 0" />
+    <parent link="base_link" />
+    <child link="chair_link" />
+    <axis xyz="0 0 0" />
+    <!-- <dynamics damping="0" friction="0" /> -->
+  </joint>
+
+
+  <link name="laser_link">
+    <inertial>
+      <origin xyz="0.0 0 -1.6" rpy="0 0 0" />
+      <mass
+        value="0.171593009361433" />
+      <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1" />
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/laser_link.STL" />
+      </geometry>
+      <material name="">
+        <color rgba="1 1 1 0.3" />
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://wheelchair_gp_description/meshes/laser_link.STL" />
+      </geometry>
+    </collision>
+  </link>
+  <joint name="laser_joint" type="fixed">
+    <origin xyz="-0.37477 0 1.625" rpy="0 0 -1.7" />
+    <parent link="chair_link" />
+    <child link="laser_link" />
+    <axis xyz="0 0 0" />
+    <!-- <dynamics damping="0" friction="0" /> -->
+  </joint>
+  
+    <link name="laser">
+    </link>
+
+    <joint name="laser_data_joint" type="fixed">
+        <origin xyz="0.0 0 -1.6" rpy="0 0 -1.7"/>
+        <parent link="laser_link"/>
+        <child link="laser"/>
+    </joint>
+
+  
+</robot>

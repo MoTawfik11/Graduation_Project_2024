@@ -1,0 +1,13 @@
+<launch>
+
+          <!-- Map server -->
+    <arg name="map_file" default="$(find wheelchair_gp_description_navigation)/maps/map.yaml"/>
+    <node pkg="map_server" name="map_server"  type="map_server" args="$(arg map_file)" />
+
+      <!-- AMCL used for localization -->
+    <include file="$(find wheelchair_gp_description_navigation)/launch/amcl.launch" />
+
+    <include file="$(find wheelchair_gp_description_navigation)/launch/move_base.launch" />
+    
+  <node name="rviz2" pkg="rviz" type="rviz" args="-d $(find wheelchair_gp_description_navigation)/rviz/navigation.rviz"/>
+</launch>
